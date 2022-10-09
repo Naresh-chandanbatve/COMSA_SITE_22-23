@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Faq from '$lib/components/FAQPageMobile.svelte';
-	import {page_0, page_0_title, page_1, page_1_title} from '$lib/data/FAQs'
+	import {page_0, page_0_title, page_1, page_1_title, page_2, page_2_title} from '$lib/data/FAQs'
 import { onMount, SvelteComponent } from 'svelte';
 	let innerWidth: number;
 	let innerHeight: number;
@@ -35,13 +35,20 @@ import { onMount, SvelteComponent } from 'svelte';
 <div class="min-h-[calc(100vh-calc(4rem))]  snap-end bg-red-500" id="events" >
 </div>
 {#if is_landscape}
-	 <!-- content here -->
+<div class="min-h-[calc(100vh-calc(4rem))]  snap-end bg-blue-500 flex flex-row justify-around">
+	<div class=""><Faq data_list={page_0} title="{page_0_title}"/></div>
+	<div class=""><Faq data_list={page_1} title="{page_1_title}"/></div>
+	<div class=""><Faq data_list={page_2} title="{page_2_title}"/></div>
+</div>
 {:else}
 <div class="min-h-[calc(100vh-calc(4rem))] snap-end bg-blue-500" id="faq" >
 	<Faq data_list={page_0} title="{page_0_title}"/>
 </div>
 <div class="min-h-[calc(100vh-calc(4rem))] snap-end bg-orange-500" id="faq" >
 	<Faq data_list={page_1} title="{page_1_title}"/>
+</div>
+<div class="min-h-[calc(100vh-calc(4rem))] snap-end bg-emerald-500" id="faq" >
+	<Faq data_list={page_2} title="{page_2_title}"/>
 </div>
 {/if}
 <div class="min-h-[calc(100vh-calc(4rem))]  snap-end bg-green-500" id="about" />

@@ -70,7 +70,7 @@
 		display: inline-flex;
 		gap: 2rem;
 		justify-content: space-between;
-		@apply container w-full lg:w-[unset] xl:max-w-xl text-sm;
+		@apply container w-full xl:max-w-xl text-sm;
 	}
 
 	.active {

@@ -1,12 +1,15 @@
 <script lang="ts">
-	import Faq from '$lib/components/FAQPage.svelte';
+	import Faq from '$lib/components/FAQPageMobile.svelte';
+	import {page_0, page_0_title, page_1, page_1_title} from '$lib/data/FAQs'
 import { onMount, SvelteComponent } from 'svelte';
 	let innerWidth: number;
 	let innerHeight: number;
 	// Should have been SvelteComponent 
 	let Cube: any;
+	let is_landscape: boolean = false; // mobile first shite
 	onMount(async () => {
 		if (innerWidth > innerHeight) {
+			is_landscape = true;
 			const mod = await import('$lib/components/HeroCubeDesktop.svelte');
 			Cube = mod.default;
 		} else {
@@ -31,8 +34,15 @@ import { onMount, SvelteComponent } from 'svelte';
 </div>
 <div class="min-h-[calc(100vh-calc(4rem))]  snap-end bg-red-500" id="events" >
 </div>
+{#if is_landscape}
+	 <!-- content here -->
+{:else}
 <div class="min-h-[calc(100vh-calc(4rem))] snap-end bg-blue-500" id="faq" >
-	<Faq />
+	<Faq data_list={page_0} title="{page_0_title}"/>
 </div>
+<div class="min-h-[calc(100vh-calc(4rem))] snap-end bg-orange-500" id="faq" >
+	<Faq data_list={page_1} title="{page_1_title}"/>
+</div>
+{/if}
 <div class="min-h-[calc(100vh-calc(4rem))]  snap-end bg-green-500" id="about" />
 <div class="min-h-[calc(100vh-calc(4rem))]  snap-end bg-purple-500" id="contact-us" />

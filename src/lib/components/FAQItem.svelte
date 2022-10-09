@@ -61,7 +61,7 @@
 		text-align: justify;
 		outline: none;
 		transition: 0.4s;
-		margin-left: 0.25rem;
+		/* margin-left: 0.25rem; */
 		margin-right: 0.25rem;
 		border-radius: 0.25rem;
 		margin-top: 0.125rem;
@@ -69,7 +69,8 @@
 		transition: border-radius 0.2s ease-in-out;
 		display: inline-flex;
 		gap: 2rem;
-		@apply container xl:max-w-xl text-sm;
+		justify-content: space-between;
+		@apply container w-full lg:w-[unset] xl:max-w-xl text-sm;
 	}
 
 	.active {
@@ -105,10 +106,10 @@
 		transition: all 0.2s ease-out;
 		color: black;
 		margin-top: 0;
-		margin-left: 0.25rem;
+		/* margin-left: 0.25rem; */
 		margin-right: 0.25rem;
 		border-radius: 0px 0px 0.25rem 0.25rem;
-		@apply container  xl:max-w-xl text-sm;
+		@apply container w-full lg:w-[unset] xl:max-w-xl text-sm;
 	}
 
 	.panel.active {

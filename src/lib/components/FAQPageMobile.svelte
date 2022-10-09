@@ -1,16 +1,16 @@
-<script>
+<script lang="ts">
 	import FaqItem from "./FAQItem.svelte";
+    import {page_0, page_0_title} from "$lib/data/FAQs";
+    export let data_list = page_0;
+    export let title = page_0_title;
 </script>
 
 
 <div class="faq">
-    <h5>FAQ</h5>
-    <FaqItem />
-    <FaqItem />
-    <FaqItem />
-    <FaqItem />
-    <FaqItem />
-
+    <h5 class="text-4xl">{title}</h5>
+    {#each data_list as data}
+        <FaqItem {...data}/>
+    {/each}
 </div>
 
 <style lang="postcss">

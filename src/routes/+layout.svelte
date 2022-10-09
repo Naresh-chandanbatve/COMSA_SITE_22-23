@@ -1,5 +1,6 @@
 <script>
 	import '../app.postcss';
+	import "iconify-icon";
 </script>
 
 <div class="drawer">
@@ -40,6 +41,7 @@
 		<label for="side-drawer" class="drawer-overlay" />
 		<ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
 			<!-- Sidebar content here -->
+			<li class="flex flex-row-reverse align-middle items-end"><label for="side-drawer" class="btn btn-ghost btn-xl flex-shrink"><iconify-icon class="text-4xl" icon="carbon:close" /></label></li>
 			<li><a>Home</a></li>
 			<li><a>About</a></li>
 			<li><a>Gallery</a></li>

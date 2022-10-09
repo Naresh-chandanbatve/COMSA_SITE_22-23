@@ -4,9 +4,9 @@
 
 <div class="drawer">
 	<input id="side-drawer" type="checkbox" class="drawer-toggle" />
-	<div class="drawer-content flex flex-col">
+	<div class="drawer-content scroll-smooth snap-y snap-mandatory snap-always scroll-m-16 flex flex-col">
 		<!-- Navbar -->
-		<div class="w-full navbar bg-base-300">
+		<div class="w-full navbar fixed top-0 left-0 bg-base-300">
 			<div class="flex-none lg:hidden">
 				<label for="side-drawer" class="btn btn-square btn-ghost">
 					<svg
@@ -28,20 +28,20 @@
 				<ul class="menu menu-horizontal">
 					<!-- Navbar menu content here -->
 					<li><a>Home</a></li>
-					<li><a>About Us</a></li>
+					<li><a>About</a></li>
 					<li><a>Gallery</a></li>
 					<li><a>Committee</a></li>
 				</ul>
 			</div>
 		</div>
-		<slot />
+		<slot /> 
 	</div>
 	<div class="drawer-side">
 		<label for="side-drawer" class="drawer-overlay" />
 		<ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
 			<!-- Sidebar content here -->
 			<li><a>Home</a></li>
-			<li><a>About Us</a></li>
+			<li><a>About</a></li>
 			<li><a>Gallery</a></li>
 			<li><a>Committee</a></li>
 		</ul>

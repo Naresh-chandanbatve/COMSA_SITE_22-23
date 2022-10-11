@@ -29,7 +29,7 @@ h5 {
     border-radius: 5px;
     font-size: 1.25rem;
     padding: .5rem;
-    @apply w-full h-full container flex flex-col justify-around items-center;
+    @apply w-full h-full container flex flex-col justify-evenly items-center;
 }
 
 </style>

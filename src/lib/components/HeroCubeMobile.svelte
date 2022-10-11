@@ -87,7 +87,7 @@
       {scene}
       geometry={cubeGeometry}
       material={cubeMaterial}
-      mat={{ roughness: 0.5, metalness: 0.5, color: 0xff3e00 }}
+      mat={{ roughness: 0.5, metalness: 0.5, color: 0x98A8F8 }}
       pos={[0, 0, 0]}
       scale={[1, 1, 1]}
       animation={rotateCube}

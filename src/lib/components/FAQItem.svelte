@@ -8,9 +8,10 @@
 		'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, consequuntur, saepe voluptatibus tempore modi.';
 	export let answer: string =
 		'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi totam magnam, quibusdam commodi veritatis corrupti ex.';
+	export let count = 0;
 </script>
 
-<div>
+<div class="{(count % 2 == 0) ? 'self-end':'self-start'}">
 	<button
 		class="accordion {is_open ? 'active' : ''}"
 		bind:this={accordion}

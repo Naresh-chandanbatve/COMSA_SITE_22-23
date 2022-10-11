@@ -1,104 +1,109 @@
 <script lang="ts">
-  import {
-    Canvas,
-    Scene,
-    PerspectiveCamera,
-    DirectionalLight,
-    AmbientLight,
-    BoxBufferGeometry,
-    Mesh,
-    MeshStandardMaterial,
-    WebGLRenderer,
-  } from "svelthree";
+	import {
+		Canvas,
+		Scene,
+		PerspectiveCamera,
+		DirectionalLight,
+		AmbientLight,
+		BoxBufferGeometry,
+		Mesh,
+		MeshStandardMaterial,
+		WebGLRenderer
+	} from 'svelthree';
 
-  let cubeGeometry = new BoxBufferGeometry(1, 1, 1);
-  let cubeMaterial = new MeshStandardMaterial();
+	let cubeGeometry = new BoxBufferGeometry(1, 1, 1);
+	let cubeMaterial = new MeshStandardMaterial();
 
-  /**
-   * When animating via 'animation'-prop you have to provide a "special" function:
-   * const ani = (obj):{
-   *								onStart:() => void,
-   *								onDestroy:() => void,
-   *								onSceneDeactivated?:() => void,
-   *								onSceneReactivated?:() => void
-   *							}
-   *							=> {
-   *								...
-   *								// obligatory
-   *								const foo = ():void => {}
-   *								const bar = ():void => {}
-   *
-   *								// optional
-   *								const optFoo = ():void => {}
-   *								const optBar = ():void => {}
-   *
-   *								return {
-   *									onStart: foo
-   *									onDestroy: bar
-   *									onSceneDeactivated: optFoo
-   *									onSceneReactivated: optBar
-   *								}
-   *							}
-   */
+	/**
+	 * When animating via 'animation'-prop you have to provide a "special" function:
+	 * const ani = (obj):{
+	 *								onStart:() => void,
+	 *								onDestroy:() => void,
+	 *								onSceneDeactivated?:() => void,
+	 *								onSceneReactivated?:() => void
+	 *							}
+	 *							=> {
+	 *								...
+	 *								// obligatory
+	 *								const foo = ():void => {}
+	 *								const bar = ():void => {}
+	 *
+	 *								// optional
+	 *								const optFoo = ():void => {}
+	 *								const optBar = ():void => {}
+	 *
+	 *								return {
+	 *									onStart: foo
+	 *									onDestroy: bar
+	 *									onSceneDeactivated: optFoo
+	 *									onSceneReactivated: optBar
+	 *								}
+	 *							}
+	 */
 
-  const rotateCube = (obj: any) => {
-    let rAF = 0;
-    let doRotate = false;
+	const rotateCube = (obj: any) => {
+		let rAF = 0;
+		let doRotate = false;
 
-    function onStart() {
-      startRotating();
-    }
+		function onStart() {
+			startRotating();
+		}
 
-    function startRotating() {
-      doRotate = true;
-      rAF = requestAnimationFrame(rotate);
-    }
+		function startRotating() {
+			doRotate = true;
+			rAF = requestAnimationFrame(rotate);
+		}
 
-    function rotate() {
-      if (doRotate) {
-        obj.rotation.x += 0.01;
-        obj.rotation.y += 0.01;
-        obj.rotation.z += 0.01;
-        rAF = requestAnimationFrame(rotate);
-      }
-    }
+		function rotate() {
+			if (doRotate) {
+				obj.rotation.x += 0.01;
+				obj.rotation.y += 0.01;
+				obj.rotation.z += 0.01;
+				rAF = requestAnimationFrame(rotate);
+			}
+		}
 
-    function onDestroy() {
-      doRotate = false;
-      cancelAnimationFrame(rAF);
-    }
+		function onDestroy() {
+			doRotate = false;
+			cancelAnimationFrame(rAF);
+		}
 
-    return {
-      onStart: onStart,
-      onDestroy: onDestroy,
-    };
-  };
+		return {
+			onStart: onStart,
+			onDestroy: onDestroy
+		};
+	};
 </script>
 
-<Canvas let:sti w={800} h={800}>
+<Canvas
+	let:sti
+	w={750}
+	h={750}
+	class="2xl:mr-[6rem] 3xl:mr-[4rem] 4xl:mr-[5rem] canvas-spacing"
+>
+	<Scene {sti} let:scene id="scene1">
+		<PerspectiveCamera {scene} id="cam1" pos={[0, 0, 3]} lookAt={[0, 0, 0]} />
+		<AmbientLight {scene} intensity={1.25} />
+		<DirectionalLight {scene} pos={[3, 3, 3]} />
 
-  <Scene {sti} let:scene id="scene1">
+		<Mesh
+			{scene}
+			geometry={cubeGeometry}
+			material={cubeMaterial}
+			mat={{ roughness: 0.5, metalness: 0.5, color: 0x083AA9 }}
+			pos={[0, 0, 0]}
+			scale={[1, 1, 1]}
+			animation={rotateCube}
+			aniauto
+		/>
+	</Scene>
 
-    <PerspectiveCamera {scene} id="cam1" pos={[0, 0, 3]} lookAt={[0, 0, 0]} />
-    <AmbientLight {scene} intensity={1.25} />
-    <DirectionalLight {scene} pos={[3, 3, 3]} />
-
-    <Mesh
-      {scene}
-      geometry={cubeGeometry}
-      material={cubeMaterial}
-      mat={{ roughness: 0.5, metalness: 0.5, color: 0xff3e00 }}
-      pos={[0, 0, 0]}
-      scale={[1, 1, 1]}
-      animation={rotateCube}
-      aniauto />
-
-  </Scene>
-
-  <WebGLRenderer
-    {sti}
-    sceneId="scene1"
-    camId="cam1"
-    config={{ antialias: true, alpha: true }} />
-
+	<WebGLRenderer {sti} sceneId="scene1" camId="cam1" config={{ antialias: true, alpha: true }} />
 </Canvas>
+
+
+<style global>
+	.canvas-spacing {
+		
+	}
+</style>

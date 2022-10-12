@@ -79,7 +79,7 @@
 	let:sti
 	w={750}
 	h={750}
-	class="2xl:mr-[6rem] 3xl:mr-[4rem] 4xl:mr-[5rem] canvas-spacing"
+	class="relative -right-64 lg:-right-48 xl:-right-32 2xl:-right-24"
 >
 	<Scene {sti} let:scene id="scene1">
 		<PerspectiveCamera {scene} id="cam1" pos={[0, 0, 3]} lookAt={[0, 0, 0]} />
@@ -90,7 +90,7 @@
 			{scene}
 			geometry={cubeGeometry}
 			material={cubeMaterial}
-			mat={{ roughness: 0.5, metalness: 0.5, color: 0x083AA9 }}
+			mat={{ roughness: 0.5, metalness: 0.5, color: 0xcd54ff }}
 			pos={[0, 0, 0]}
 			scale={[1, 1, 1]}
 			animation={rotateCube}

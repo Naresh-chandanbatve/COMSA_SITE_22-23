@@ -75,7 +75,7 @@
   };
 </script>
 
-<Canvas let:sti w={400} h={400}>
+<Canvas let:sti w={400} h={400} class="mb-20">
 
   <Scene {sti} let:scene id="scene1">
 

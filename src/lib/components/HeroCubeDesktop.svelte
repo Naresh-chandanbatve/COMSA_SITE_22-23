@@ -102,8 +102,3 @@
 </Canvas>
 
 
-<style global>
-	.canvas-spacing {
-		
-	}
-</style>

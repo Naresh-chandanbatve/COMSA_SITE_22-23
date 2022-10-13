@@ -1,15 +1,15 @@
 <script lang="ts">
 	import FaqItem from "./FAQItem.svelte";
-    import {page_0, page_0_title} from "$lib/data/FAQs";
-    export let data_list = page_0;
-    export let title = page_0_title;
+    import {page_1, page_1_title} from "$lib/data/FAQs";
+    export let data_list = page_1;
+    export let title = page_1_title;
 </script>
 
 
 <div class="faq">
-    <h5 class="text-4xl">{title}</h5>
+    <h5 class="text-4xl vimh">{title}</h5>
     {#each data_list as data, i}
-        <FaqItem {...data} count={i}/>
+        <FaqItem {...data}/>
     {/each}
 </div>
 
@@ -29,7 +29,7 @@ h5 {
     border-radius: 5px;
     font-size: 1.25rem;
     padding: .5rem;
-    @apply w-3/5 h-full container flex flex-col justify-evenly items-center;
+    @apply w-3/5 h-full container flex flex-col justify-evenly items-center gap-2;
 }
 
 </style>

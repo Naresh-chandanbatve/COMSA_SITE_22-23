@@ -8,10 +8,9 @@
 		'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, consequuntur, saepe voluptatibus tempore modi.';
 	export let answer: string =
 		'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi totam magnam, quibusdam commodi veritatis corrupti ex.';
-	export let count = 0;
 </script>
 
-<div class="{(count % 2 == 0) ? 'self-end':'self-start'}">
+<div class="self-center">
 	<button
 		class="accordion {is_open ? 'active' : ''}"
 		bind:this={accordion}
@@ -56,7 +55,6 @@
 		background-color: #eee;
 		color: #444;
 		cursor: pointer;
-		padding: 0.75rem;
 		/* max-width: 90vw; */
 		border: none;
 		text-align: justify;
@@ -71,7 +69,7 @@
 		display: inline-flex;
 		gap: 2rem;
 		justify-content: space-between;
-		@apply container w-full xl:max-w-xl text-sm;
+		@apply container w-full xl:max-w-xl text-base p-5 lg:p-9;
 	}
 
 	.active {

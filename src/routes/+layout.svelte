@@ -1,13 +1,23 @@
 <script>
 	import '../app.postcss';
 	import "iconify-icon";
+	import { Modals, closeModal } from 'svelte-modals'
 </script>
+
+<Modals>
+	<div
+	  slot="backdrop"
+	  class="backdrop z-[100]"
+	  on:click={closeModal}
+	/>
+  </Modals>
+
 
 <div class="drawer">
 	<input id="side-drawer" type="checkbox" class="drawer-toggle" />
 	<div class="drawer-content scroll-smooth snap-y snap-mandatory snap-always scroll-m-16 flex flex-col">
 		<!-- Navbar -->
-		<div class="w-full navbar fixed top-0 left-0 bg-base-300">
+		<div class="w-full navbar fixed top-0 left-0 bg-base-300 z-50">
 			<div class="flex-none lg:hidden">
 				<label for="side-drawer" class="btn btn-square btn-ghost">
 					<svg
@@ -50,6 +60,15 @@
 	</div>
 </div>
 
-
+  <style>
+	.backdrop {
+	  position: fixed;
+	  top: 0;
+	  bottom: 0;
+	  right: 0;
+	  left: 0;
+	  background: rgba(0,0,0,0.50)
+	}
+  </style>
 
 

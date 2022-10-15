@@ -2,12 +2,14 @@
 	import '../app.postcss';
 	import "iconify-icon";
 	import { Modals, closeModal } from 'svelte-modals'
+	import {fade} from 'svelte/transition'
 </script>
 
 <Modals>
 	<div
 	  slot="backdrop"
 	  class="backdrop z-[100]"
+	  transition:fade
 	  on:click={closeModal}
 	/>
   </Modals>

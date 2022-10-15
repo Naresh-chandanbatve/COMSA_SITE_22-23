@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { closeModal } from 'svelte-modals';
-
+	import {fade} from 'svelte/transition';
 	// provided by <Modals />
 	export let isOpen: boolean;
 </script>
 
 {#if isOpen}
-	<div class="s-modal z-[200]">
+	<div class="s-modal z-[200]" transition:fade>
 		<div class="modal-container">
 			<img class="image" src="http://placeimg.com/400/400/tech" alt="Event Description" />
 			<div class="text-container">
@@ -52,8 +52,8 @@
 		padding: 2rem;
 		display: flex;
 		flex-direction: column;
-		overflow: scroll;
-		@apply w-full h-full pointer-events-none min-w-[15rem] self-center;
+		/* overflow: scroll; */
+		@apply w-full h-full xl:w-3/4 xl:h-3/4 pointer-events-none overflow-x-hidden overflow-y-auto min-w-[15rem] self-center;
 	}
 
 	.modal-container * {

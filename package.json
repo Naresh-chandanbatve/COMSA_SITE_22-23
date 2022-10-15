@@ -22,6 +22,7 @@
 		"@types/three": "^0.144.0",
 		"@typescript-eslint/eslint-plugin": "^5.27.0",
 		"@typescript-eslint/parser": "^5.27.0",
+		"aos": "3.0.0-beta.6",
 		"autoprefixer": "^10.4.7",
 		"cookie": "^0.4.1",
 		"daisyui": "^2.18.1",

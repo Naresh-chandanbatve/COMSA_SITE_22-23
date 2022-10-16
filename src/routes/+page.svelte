@@ -7,6 +7,7 @@
 	import AboutUs from '$lib/components/AboutUs.svelte';
 	import EventCard from '$lib/components/EventCard.svelte';
 	import Loader from '$lib/components/Loader.svelte';
+	import {events} from '$lib/data/events';
 	let innerWidth: number;
 	let innerHeight: number;
 	// Should have been SvelteComponent
@@ -22,7 +23,7 @@
 		if (innerWidth < 1024) await goto('/m/');
 		const mod = await import('$lib/components/HeroCubeDesktop.svelte');
 		Cube = mod.default;
-		loadPromiseResolve();
+		setTimeout(loadPromiseResolve, 100);
 	});
 </script>
 
@@ -33,7 +34,7 @@
 {:then value}
 	<div
 		style="--bg-url: url({DesktopHero});"
-		class="hero-bg min-h-[calc(100vh-calc(4rem))] flex flex-col lg:flex-row bg-base-100 overflow-x-hidden mt-16 scroll-mt-16"
+		class="hero-bg min-h-screen flex flex-col lg:flex-row bg-base-100 overflow-x-hidden "
 		id="hero"
 	>
 		<div id="hero-half" class="flex-grow-[2] flex flex-col">
@@ -54,20 +55,16 @@
 		id="content"
 	>
 		<div class="mt-10 w-5/6 flex flex-row flex-wrap justify-evenly align-middle gap-10">
-			<h1 class="text-4xl text-center text-base-content w-screen vimh">EVENTS</h1>
-			<EventCard />
-			<EventCard />
-			<EventCard />
-			<EventCard />
-			<EventCard />
-			<EventCard />
-			<EventCard />
-			<EventCard />
+			<h1 id="events" class="text-4xl text-center text-base-content w-screen vimh">EVENTS</h1>
+			{#each events as event}
+			<EventCard name={event.name} desc={event.desc} id={event.id} image={event.image}/>
+			{/each}
+		
 		</div>
 		<div class=" mt-10 w-5/6 flex flex-row flex-wrap justify-evenly align-middle">
-			<div class="w-5/6"><Faq data_list={page_1} title={page_1_title} /></div>
+			<div id="faq" class="w-5/6"><Faq data_list={page_1} title={page_1_title} /></div>
 		</div>
-		<div class="mt-10 w-5/6 flex flex-row flex-wrap justify-evenly align-middle">
+		<div id="about-us" class="mt-10 w-5/6 flex flex-row flex-wrap justify-evenly align-middle">
 			<AboutUs />
 		</div>
 	</div>

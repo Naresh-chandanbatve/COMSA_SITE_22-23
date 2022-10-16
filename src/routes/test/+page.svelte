@@ -1,7 +1,7 @@
 <script>
-    import EventModal from "$lib/components/EventModal.svelte";
+    import EventModal from "$lib/components/SelectEventModal.svelte";
 </script>
 
 <div class="mt-16">
-<EventModal />
+<EventModal isOpen/>
 </div>

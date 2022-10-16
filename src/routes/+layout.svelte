@@ -1,25 +1,50 @@
-<script>
+<script lang="ts">
 	import '../app.postcss';
-	import "iconify-icon";
-	import { Modals, closeModal } from 'svelte-modals'
-	import {fade} from 'svelte/transition'
+	import 'iconify-icon';
+
+	import { Modals, closeModal } from 'svelte-modals';
+	import { fade } from 'svelte/transition';
+
+	import { supabaseClient } from '$lib/db';
+	import { invalidate } from '$app/navigation';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		const {
+			data: { subscription }
+		} = supabaseClient.auth.onAuthStateChange(() => {
+			invalidate('supabase:auth');
+		});
+
+		return () => {
+			subscription.unsubscribe();
+		};
+	});
+
+	import type { LayoutLoad } from './$types';
+	import { getSupabase } from '@supabase/auth-helpers-sveltekit';
+
+	export const load: LayoutLoad = async (event) => {
+		const { session } = await getSupabase(event);
+		return { session };
+	};
 </script>
 
-<Modals>
-	<div
-	  slot="backdrop"
-	  class="backdrop z-[100]"
-	  transition:fade
-	  on:click={closeModal}
-	/>
-  </Modals>
+<!-- <svelte:window bind:scrollY={content_div} /> -->
 
+<Modals>
+	<div slot="backdrop" class="backdrop z-[100]" transition:fade on:click={closeModal} />
+</Modals>
 
 <div class="drawer">
 	<input id="side-drawer" type="checkbox" class="drawer-toggle" />
-	<div class="drawer-content scroll-smooth snap-y snap-mandatory snap-always scroll-m-16 flex flex-col">
+	<div
+		class="drawer-content scroll-smooth snap-y snap-mandatory snap-always scroll-m-16 flex flex-col"
+	>
 		<!-- Navbar -->
-		<div class="w-full navbar fixed top-0 left-0 bg-base-300 z-50">
+		<div
+			class="w-full navbar fixed top-0 left-0 bg-tansparent transition-colors duration-200 z-50"
+		>
 			<div class="flex-none lg:hidden">
 				<label for="side-drawer" class="btn btn-square btn-ghost">
 					<svg
@@ -47,13 +72,17 @@
 				</ul>
 			</div>
 		</div>
-		<slot /> 
+		<slot />
 	</div>
 	<div class="drawer-side">
 		<label for="side-drawer" class="drawer-overlay" />
 		<ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
 			<!-- Sidebar content here -->
-			<li class="flex flex-row-reverse align-middle items-end"><label for="side-drawer" class="btn btn-ghost btn-xl flex-shrink"><iconify-icon class="text-4xl" icon="carbon:close" /></label></li>
+			<li class="flex flex-row-reverse align-middle items-end">
+				<label for="side-drawer" class="btn btn-ghost btn-xl flex-shrink"
+					><iconify-icon class="text-4xl" icon="carbon:close" /></label
+				>
+			</li>
 			<li><a>Home</a></li>
 			<li><a>About</a></li>
 			<li><a>Gallery</a></li>
@@ -62,15 +91,13 @@
 	</div>
 </div>
 
-  <style>
+<style>
 	.backdrop {
-	  position: fixed;
-	  top: 0;
-	  bottom: 0;
-	  right: 0;
-	  left: 0;
-	  background: rgba(0,0,0,0.50)
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		background: rgba(0, 0, 0, 0.5);
 	}
-  </style>
-
-
+</style>

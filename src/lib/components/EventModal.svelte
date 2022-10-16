@@ -3,29 +3,54 @@
 	import {fade} from 'svelte/transition';
 	// provided by <Modals />
 	export let isOpen: boolean;
+	export let id: string;
+
+	import {events} from '$lib/data/events';
+	import { goto } from '$app/navigation';
+
+	let data = events.find((event) => event.id == id) || events[0];
+	
+	let badge_text: string;
+	let badge_color: string;
+	switch (data.players) {
+		case 1:
+			badge_text = "Solo";
+			badge_color = "badge-primary";
+			break;
+		case 2:
+			badge_text = "Duo";
+			badge_color = "badge-secondary";
+			break;
+		case 3:
+			badge_text = "Trio";
+			badge_color = "badge-accent";
+			break;
+		case 4:
+			badge_text = "Quad";
+			badge_color = "badge-error";
+			break;
+		case 5:
+			badge_text = "Squad";
+			badge_color = "badge-success";
+			break;
+		default:
+			break;
+	}
 </script>
 
 {#if isOpen}
 	<div class="s-modal z-[200]" transition:fade>
 		<div class="modal-container">
-			<img class="image" src="http://placeimg.com/400/400/tech" alt="Event Description" />
+			<img class="image" src="{data.image ? data.image : 'http://placeimg.com/400/400/tech'}" alt="Event Description" />
 			<div class="text-container">
-				<h1 class="title vimh">Heading</h1>
-				<div class="date">Date: Yes</div>
-				<div class="description">
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur iure harum quam sequi
-						dolor sapiente corrupti, quos praesentium exercitationem quibusdam distinctio ducimus
-						fugit expedita? Nostrum quia corrupti facere neque rerum!
-					</p>
-					<p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem sint provident id
-						doloribus minima non odio maxime beatae dignissimos quos voluptatibus doloremque
-						perferendis qui asperiores, autem necessitatibus dolore officiis nobis.
-					</p>
+				<h1 class="title vimh">{data.name}</h1>
+				<div class="badge {badge_color} badge-outline">{badge_text}</div>
+				<div class="date">Date: {(new Date(data.date)).toLocaleDateString('en-IN')}</div>
+				<div class="description text-justify">
+					{data.long_desc}
 				</div>
 				<div class="flex flex-col p-2 gap-4 w-full">
-					<button class="btn btn-block btn-primary" id="btn-1">Register</button>
+					<button on:click={()=>{closeModal();goto(`/register/${data.id}`)}} class="btn btn-block btn-primary" id="btn-1">Register</button>
 					<button class="btn btn-block btn-secondary" on:click={closeModal} id="btn-2">Back</button>
 				</div>
 			</div>
@@ -64,7 +89,7 @@
 		/* max-width: 70vw; */
 		max-height: auto;
 		border-radius: 1rem 1rem 0 0;
-		@apply container;
+		@apply container max-w-2xl;
 	}
 
 	.text-container {

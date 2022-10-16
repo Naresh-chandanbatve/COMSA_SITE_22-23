@@ -10,7 +10,7 @@
     text-align: center;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 4rem);
+    @apply absolute bg-black top-0 left-0 bottom-0 right-0 z-[400];
 }
 
 .ring{

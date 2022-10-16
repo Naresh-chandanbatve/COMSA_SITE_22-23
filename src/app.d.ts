@@ -2,11 +2,17 @@
 // for information about these interfaces
 // and what to do when importing types
 declare namespace App {
-	interface Locals {
-		userid: string;
-	}
+  interface Locals {
+    userid: string;
+  }
 
-	// interface PageData {}
+  interface Supabase {
+    Database: import("./DatabaseDefinitions").Database;
+    SchemaName: "public";
+  }
+  interface PageData {
+    session: import("@supabase/supabase-js").Session | null;
+  }
 
-	// interface Platform {}
+  // interface Platform {}
 }
